@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: hello
+    destination: /var/www/html/
+hooks:
+  BeforeInstall:
+    - location: scripts/say_hello
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/say_goodbye
+      timeout: 300
+      runas: root
