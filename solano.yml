@@ -21,5 +21,3 @@ tddium:
   nodejs_version: 0.10.31
   php_version: 5.3.29
   ruby_version: ruby-2.1.5
-  system:
-    queue: "agent-testing"
