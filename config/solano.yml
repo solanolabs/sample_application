@@ -1,0 +1,13 @@
+ruby_version: 'ruby-2.2.2'
+bundler_version: 1.10.6
+test_pattern:
+  - spec/**_spec.rb
+test_exclude_pattern:
+  - spec/agent_spec.rb
+cache:
+  per_profile: true
+  key_paths:
+    - Gemfile
+    - Gemfile.lock
+    - solano.gemspec
+    - lib/solano/version.rb
