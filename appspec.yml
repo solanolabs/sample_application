@@ -4,11 +4,11 @@ files:
   - source: www/
     destination: /var/www/html/
 hooks:
-  BeforeInstall:
-    - location: scripts/say_hello
+  ApplicationStart:
+    - location: scripts/say_hello.sh
       timeout: 300
       runas: root
   ApplicationStop:
-    - location: scripts/say_goodbye
+    - location: scripts/say_goodbye.sh
       timeout: 300
       runas: root

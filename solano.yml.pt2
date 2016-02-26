@@ -1,0 +1,29 @@
+## SauceLabs browser testing on previously built index.html
+## Use `solano config:add` to set sensitive environment variables.
+## See http://docs.solanolabs.com/Setup/setting-environment-variables/#via-config-variables
+## environment:
+##   'SAUCE_USERNAME': '<value>'
+##   'SAUCE_ACCESS_KEY': '<value>'
+
+nodejs_version: '0.12.4'
+
+hooks:
+  pre_setup: |
+    set -o errexit -o pipefail
+    wget https://saucelabs.com/downloads/sc-4.3.14-linux.tar.gz
+    tar -xzf sc-4.3.14-linux.tar.gz
+  worker_setup: |
+    # Start Webserver
+    (cd www && python -m SimpleHTTPServer) &
+    # Start SauceConnect
+    (cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY) &
+    sleep 10
+
+tests:
+  - platform="Windows 8.1" browserName="chrome" version="43" JUNIT_DIR="junit_reports/windows_8_1_chrome_43" bundle exec rspec functional/spec/test1_spec.rb
+  - platform="Windows 7" browserName="firefox" version="40" JUNIT_DIR="junit_reports/windows_7_firefox40" bundle exec rspec functional/spec/test1_spec.rb
+  - platform="Windows XP" browserName="firefox" version="39" JUNIT_DIR="junit_reports/windows_xp_firefox_39" bundle exec rspec functional/spec/test1_spec.rb
+  - platform="OS X 10.9" browserName="chrome" version="45" JUNIT_DIR="junit_reports/os_x_10_9_chrome_45" bundle exec rspec functional/spec/test1_spec.rb
+
+test_exclude_pattern:
+  - spec/**.rb

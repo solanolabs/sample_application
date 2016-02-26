@@ -1,0 +1,18 @@
+## Use `solano config:add` to set sensitive environment variables.
+## See http://docs.solanolabs.com/Setup/setting-environment-variables/#via-config-variables
+## environment:
+##   'UPLOAD_BUCKET': '<value>'
+##   'UPLOAD_AWS_ACCESS_KEY_ID':  '<value>'
+##   'UPLOAD_AWS_SECRET_ACCESS_KEY': '<value>'
+
+ruby_version: 'ruby-2.1.5'
+bundler_version: 1.10.6
+
+test_pattern:
+  - spec/**_spec.rb
+
+hooks:
+  post_build: | 
+    chmod +x $TDDIUM_REPO_ROOT/bin/*
+    chmod +x $TDDIUM_REPO_ROOT/scripts/*
+    $TDDIUM_REPO_ROOT/scripts/build_and_upload_gem.sh
