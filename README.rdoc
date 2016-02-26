@@ -19,7 +19,7 @@ and retrieve your account status all from within your terminal.
 
 == Getting Started
 
-See http://docs.solanolabs.com for more information.
+See https://docs.solanolabs.com for more information.
 
 For contributed code, see the extras directory.
 

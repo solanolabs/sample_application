@@ -1,4 +1,3 @@
-## Use `solano config:add` to set sensitive environment variables.
 ## See http://docs.solanolabs.com/Setup/setting-environment-variables/#via-config-variables
 ## environment:
 ##   'UPLOAD_BUCKET': '<value>'
@@ -11,19 +10,10 @@ bundler_version: 1.10.6
 test_pattern:
   - spec/**_spec.rb
 test_exclude_pattern:
-  - spec/agent_spec.rb
-  - spec/cli/commands/spec_spec.rb
+  - functional/**_spec.rb
 
 hooks:
   post_build: | 
     chmod +x $TDDIUM_REPO_ROOT/bin/*
     chmod +x $TDDIUM_REPO_ROOT/scripts/*
     $TDDIUM_REPO_ROOT/scripts/build_and_upload_gem.sh
-
-cache:
-  key_paths:
-    - Gemfile
-    - Gemfile.lock
-    - solano.yml
-    - solano.gemspec
-    - lib/solano/version.rb
