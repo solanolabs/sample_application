@@ -16,10 +16,10 @@ hooks:
   worker_setup: |
     # Start Webserver
     (cd www && python -m SimpleHTTPServer) &
-    sleep 15
     # Start SauceConnect
     (cd sc-*-linux && ./bin/sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY) &
-    sleep 15
+    # Give enough time for SauceConnect and Webserver to initialize
+    sleep 30
 
 tests:
   - platform="Windows 8.1" browserName="chrome" version="43" JUNIT_DIR="junit_reports/windows_8_1_chrome_43" bundle exec rspec functional/spec/test1_spec.rb
